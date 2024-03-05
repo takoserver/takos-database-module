@@ -1,16 +1,23 @@
-import { createRequire } from 'https://deno.land/std@0.177.0/node/module.ts';
-const require = createRequire(import.meta.url);
-const mongoose = require('mongoose');
+import { MongoClient } from "npm:mongodb@6.4.0";
 import { Client } from "https://deno.land/x/mysql@v2.12.1/mod.ts";
-
-export const connect = async (databaseKind:  "mysql" | "mongoDB" | "denokv",username: string,password: string,addres: string,port: string,db: string) => {
+import { TakoKV } from "https://deno.land/x/takokv@v0.70-unstable/mod.ts";
+let client;
+let dbKind: undefined | string;
+// deno-lint-ignore no-explicit-any
+export async function connect(databaseKind:  "mysql" | "mongoDB" | "denokv",username: string,password: string,addres: string,port: string,db: string): Promise<any> {
+  if(dbKind == undefined) {
+    dbKind = databaseKind
+  } else {
+    console.log("conected")
+    return
+  }
   switch (databaseKind) {
     case "mysql":
-      return await mysqlCnecting(username,password,addres,port,db)
-      //break;
+      client = await mysqlCnecting(username,password,addres,port,db)
+      return "A"
     case "mongoDB":
-      return await mongooseConecting(username,password,addres,port,db)
-      //break
+      connectMongoDB().catch(console.error)
+      return "a"
     case "denokv":
       //
       break
@@ -19,6 +26,8 @@ export const connect = async (databaseKind:  "mysql" | "mongoDB" | "denokv",user
       return {status: "unfaild"}
       //break;
   }
+}
+export function insert() {
 }
 async function mysqlCnecting(username:string, passwor: string,addres: string,port: string,db: string) {
   const client = await new Client().connect({
@@ -30,7 +39,15 @@ async function mysqlCnecting(username:string, passwor: string,addres: string,por
   });
   return client
 }
-async function mongooseConecting(username:string, passwor: string,addres: string,port: string,db: string) {
-  await mongoose.connect(`mongodb://${username}:${passwor}@${addres}:${port}/${db}`)
-  .then(() => console.log('Connected!'));
+async function connectMongoDB(){
+  const uri = "mongodb+srv://<username>:<password>@<cluster-address>/test?retryWrites=true&w=majority";
+  const client = new MongoClient(uri);
+  try {
+    await client.connect();
+    console.log("Connected to the database!");
+  } catch (e) {
+    console.error(e);
+  } finally {
+    await client.close();
+  }
 }

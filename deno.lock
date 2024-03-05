@@ -1,0 +1,10 @@
+{
+  "version": "3",
+  "redirects": {
+    "https://deno.land/x/takokv/mod.ts": "https://deno.land/x/takokv@v0.70-unstable/mod.ts",
+    "https://esm.sh/lodash": "https://esm.sh/lodash@4.17.21",
+    "https://esm.sh/v135/@types/lodash@4.14.202/index": "https://esm.sh/v135/@types/lodash@4.14.202/index~.d.ts",
+    "https://esm.sh/v135/@types/lodash@^4/index.d.ts": "https://esm.sh/v135/@types/lodash@4.14.202/index.d.ts"
+  },
+  "remote": {}
+}
