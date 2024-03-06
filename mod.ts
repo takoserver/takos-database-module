@@ -1,10 +1,10 @@
 import { MongoClient } from "npm:mongodb@6.4.0";
 import mysql from 'npm:mysql2@3.9.2'
-import { TakoKV } from "jsr:@takoserver/takokv";
+import { TakoKV } from "@takoserver/takokv";
 let client;
 let dbKind: undefined | string;
 // deno-lint-ignore no-explicit-any
-export async function connect(databaseKind:  "mysql" | "mongoDB" | "denokv",username: string,password: string,addres: string,port: string,db: string): Promise<any> {
+export async function connect(databaseKind:  "mysql" | "mongoDB" | "denokv",username: string,password: string,addres: string,port: number,db: string): Promise<any> {
   if(dbKind == undefined) {
     dbKind = databaseKind
   } else {
@@ -29,14 +29,22 @@ export async function connect(databaseKind:  "mysql" | "mongoDB" | "denokv",user
 }
 export function insert() {
 }
-async function mysqlCnecting(username:string, passwor: string,addres: string,port: string,db: string) {
+async function mysqlCnecting(username:string, passwor: string,addres: string,port: number,db: string) {
+  /*
   const client = await new Client().connect({
     hostname: addres,
     username,
     db,
     poolSize: 3, // connection limit
     password: passwor,
-  });
+  });*/
+  client = await mysql.createConnection({
+    host: addres,
+    port: port,
+    user: username,
+    password: passwor,
+    database: db
+  })
   return client
 }
 async function connectMongoDB(){

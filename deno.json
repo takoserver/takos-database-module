@@ -1,9 +1,9 @@
 {
   "name": "@takoserver/takos-database",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "exports": "./mod.ts",
   "imports": {
-    "@takoserver/takokv": "jsr:@takoserver/takokv@^0.1.0",
+    "@takoserver/takokv": "jsr:@takoserver/takokv@0.1.1",
     "@std/assert": "jsr:@std/assert@0.218.0",
     "mysql/": "https://deno.land/x/mysql@v2.12.1/"
   }
