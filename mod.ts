@@ -1,5 +1,5 @@
 import { MongoClient } from "npm:mongodb@6.4.0";
-import { Client } from "https://deno.land/x/mysql@v2.12.1/mod.ts";
+import mysql from 'npm:mysql2@3.9.2'
 import { TakoKV } from "jsr:@takoserver/takokv";
 let client;
 let dbKind: undefined | string;
