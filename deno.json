@@ -1,5 +1,6 @@
 {
   "name": "@takoserver/takos-database",
   "version": "0.1.0",
-  "exports": "./mod.ts"
+  "exports": "./mod.ts",
+  "imports": { "@takoserver/takokv": "jsr:@takoserver/takokv@^0.1.0" }
 }
