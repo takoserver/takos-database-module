@@ -1,6 +1,6 @@
 import { MongoClient } from "npm:mongodb@6.4.0";
 import { Client } from "https://deno.land/x/mysql@v2.12.1/mod.ts";
-import { TakoKV } from "https://deno.land/x/takokv@v0.70-unstable/mod.ts";
+import { TakoKV } from "jsr:@takoserver/takokv";
 let client;
 let dbKind: undefined | string;
 // deno-lint-ignore no-explicit-any
